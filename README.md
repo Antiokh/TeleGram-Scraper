@@ -1,4 +1,4 @@
-### Telegram Scraper and Adder
+### Telegram Scraper and Adder (Users, Messages, Addition, Sending, Metadata)
 Initial release.
 
 Usage: `tgs.exe [command] [options]`
@@ -16,6 +16,7 @@ send         Send messages to users
 license      Check the license or create a license request
 ```
 
+>Tested on Telegram groups with >400000 messages and >4000 users.
 
 ## API Setup
 
