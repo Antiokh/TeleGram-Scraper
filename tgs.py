@@ -690,12 +690,12 @@ async def main():
         
         # Main parser help
         print(f"{text_bold}Commands:{color_reset}\n")
-        print(f"{color_sun}{text_bold}setup{color_reset}{color_yellow}     Initial setup with data from {color_blue}https://my.telegram.org/apps{color_reset}")
-        print(f"{color_sun}{text_bold}users{color_reset}{color_yellow}     Scrape members from a group{color_reset}")
-        print(f"{color_sun}{text_bold}add{color_reset}{color_yellow}       Add members to a group{color_reset}")
-        print(f"{color_sun}{text_bold}dump{color_reset}{color_yellow}      Fetch messages and users from a group or channel into sqlite db{color_reset}")
-        print(f"{color_sun}{text_bold}posts{color_reset}{color_yellow}     Fetch messages from a group or channel{color_reset}")
-        print(f"{color_sun}{text_bold}send{color_reset}{color_yellow}      Send messages to users{color_reset}")
+        print(f"{color_sun}{text_bold}setup{color_reset}{color_yellow}        Initial setup with data from {color_blue}https://my.telegram.org/apps{color_reset}")
+        print(f"{color_sun}{text_bold}users{color_reset}{color_yellow}        Scrape members from a group{color_reset}")
+        print(f"{color_sun}{text_bold}add{color_reset}{color_yellow}          Add members to a group{color_reset}")
+        print(f"{color_sun}{text_bold}dump{color_reset}{color_yellow}         Fetch messages and users from a group or channel into sqlite db{color_reset}")
+        print(f"{color_sun}{text_bold}posts{color_reset}{color_yellow}        Fetch messages from a group or channel{color_reset}")
+        print(f"{color_sun}{text_bold}send{color_reset}{color_yellow}         Send messages to users{color_reset}")
         print(f"{color_sun}{text_bold}license{color_reset}{color_yellow}      Check the license or create a license request{color_reset}")
         
         
