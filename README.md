@@ -1,3 +1,23 @@
+### Telegram Scraper and Adder (Users, Messages, Addition, Sending, Metadata)
+Initial release.
+
+Usage: `tgs.exe [command] [options]`
+
+Help on commands: `tgs.exe [command] -h`
+
+Commands:
+```
+setup        Initial setup with data from https://my.telegram.org/apps
+users        Scrape members from a group
+add          Add members to a group
+dump         Fetch messages and users from a group or channel into sqlite db
+posts        Fetch messages from a group or channel
+send         Send messages to users
+license      Check the license or create a license request
+```
+
+>Tested on Telegram groups with >400000 messages and >4000 users.
+
 ## API Setup
 
 -   Go to http://my.telegram.org and log in.
