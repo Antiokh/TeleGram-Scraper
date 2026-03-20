@@ -1,5 +1,34 @@
 # Changelog
 
+## 1.10.0
+
+Release date: 2026-03-20
+
+Changes since `1.9.0`:
+
+- promoted the GUI branch work to the main source branch and refreshed the public binaries from that state
+- expanded the desktop GUI into a fuller operator frontend with localized English/Russian UI and editable locale files
+- reduced GUI startup and language-switch latency by moving locale resolution into in-memory caches
+- normalized automation weekday schedules so plans can store ranges like `Mon-Thu 09:00` and mixed ranges like `Mon-Wed|Fri 09:00`
+- made `tgs_automation run-due` require a valid license before executing due jobs
+- re-verified safe GUI startup, safe automation execution, binary runner resolution, and Linux/Windows builds
+- refreshed and re-verified Windows binaries for `tgs.exe`, `tgs_automation.exe`, and `tgs_gui.exe`
+- refreshed and re-verified Linux binaries for `tgs` and `tgs_automation`
+- kept `tgs_gui.exe` as a standalone public binary because including it in `tgs.zip` still pushes the archive above GitHub's 100 MB hard limit
+
+Included artifacts in this binary release:
+
+- `tgs.exe`: Windows one-file executable
+- `tgs`: Linux one-file executable
+- `tgs_automation.exe`: Windows automation helper
+- `tgs_automation`: Linux automation helper
+- `tgs_gui.exe`: Windows desktop GUI frontend
+- `tgs.zip`: bundled CLI and automation archive
+
+Source repository:
+
+- https://github.com/Antiokh/tgs.py
+
 ## 1.9.0
 
 Release date: 2026-03-20

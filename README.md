@@ -50,6 +50,7 @@ Desktop GUI:
 
 The GUI binary is a frontend over the main CLI runtime.
 Place `tgs_gui.exe` next to `tgs.exe` in the same folder so the GUI can invoke the compiled CLI binary directly.
+The GUI supports English and Russian UI text and writes editable locale files into `tgs_config/gui_locales/`.
 The repository `tgs.zip` bundle remains focused on the CLI pair and automation helper; the GUI is distributed as a separate standalone binary because adding `tgs_gui.exe` pushes the archive above GitHub's 100 MB hard limit.
 
 ## Included Commands
@@ -131,6 +132,11 @@ Current releases use two default working folders:
 - `tgs_config/`: configs, sessions, license files, and license requests
 - `tgs_data/`: exported CSV, JSON, SQLite, archives, and media
 
+GUI-specific runtime files:
+
+- `tgs_config/gui_state.json`: remembered GUI state such as the selected language
+- `tgs_config/gui_locales/`: editable GUI locale JSON files
+
 The main config file usually lives at:
 
 - `tgs_config/config.data`
@@ -152,6 +158,7 @@ User-facing behavior:
 - `license` checks the currently available license
 - if validation fails, the tool can generate a local license request file
 - some high-impact workflows may run with reduced limits until a valid license is installed
+- automation `run-due` requires a valid license before it executes due jobs
 
 For normal usage, you only need:
 
@@ -451,6 +458,7 @@ Runner resolution behavior:
 - it falls back to `python tgs.py` only when the main binary is not available
 - `run-due` expects an external scheduler heartbeat such as Windows Task Scheduler or cron
 - nothing runs just because a job exists in a plan file; a scheduler still has to call `run-due`
+- `run-due` validates the configured license before execution and skips due jobs until the license passes
 
 Examples:
 
@@ -551,6 +559,7 @@ Operational model:
 - if the current local date/time is earlier than a job slot, the job is skipped for now
 - if the current local date/time is later than the slot, the job runs once and is recorded in SQLite
 - the default automation state DB lives next to the plan as `<plan_name>_automation.sqlite`
+- accepted schedule styles include `Daily HH:MM`, `Mon-Fri HH:MM`, `Mon-Thu HH:MM`, `Mon-Wed|Fri HH:MM`, and `Day <N> HH:MM`
 
 ## Platform Notes
 
