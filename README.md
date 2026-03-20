@@ -1,13 +1,12 @@
 # TeleGram-Scraper
 
-Public binary distribution repository for `tgs.py`.
+Public binary distribution repository for the `tgs.py` project.
 
 Included artifacts:
 
 - `tgs.exe`: Windows one-file executable
 - `tgs`: Linux one-file executable
 - `tgs.zip`: bundled binary archive
-- `tgs.py`: current source snapshot packaged together with the release artifacts
 
 Main usage:
 
@@ -27,13 +26,14 @@ Available commands:
 - `dump`
 - `posts`
 - `send`
+- `post`
 - `license`
 
 Typical workflow:
 
 1. Run `setup`
 2. Check command help with `-h`
-3. Use `users`, `posts`, `dump`, `add`, or `send` as needed
+3. Use `users`, `posts`, `dump`, `send`, or `post` as needed
 
 Examples:
 
@@ -43,12 +43,12 @@ tgs.exe users -s source_group -o users/members.csv
 tgs.exe posts -s my_channel -t sqlite -f "html,md,json"
 tgs.exe dump -s my_channel -m -a -f "html,md,json"
 tgs.exe send -i users/members.csv -t message.md -f markdown --preview
+tgs.exe post -g my_channel -t announcement.html -f html --dry-run
 ```
 
 Notes:
 
-- This repository is intended for release artifacts.
-- Detailed implementation work happens in the source repository.
+- This repository is intended for release artifacts only.
 - Use command help for the most accurate CLI reference.
 
 Source repository:
