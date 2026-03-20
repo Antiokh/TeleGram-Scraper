@@ -1,4 +1,4 @@
-﻿# TeleGram-Scraper
+# TeleGram-Scraper
 
 Русская версия документации: [README.ru.md](README.ru.md)
 
@@ -8,6 +8,8 @@ This repository contains release artifacts only:
 
 - `tgs.exe`: Windows one-file executable
 - `tgs`: Linux one-file executable
+- `tgs_automation.exe`: Windows automation helper
+- `tgs_automation`: Linux automation helper
 - `tgs.zip`: bundled release archive
 
 Source code lives in the main repository:
@@ -28,6 +30,18 @@ Main workflows:
 - send direct messages in bulk from a template
 - post one formatted message to a target group or channel
 - check the local license state or generate a license request
+
+## Included Binaries
+
+Main CLI:
+
+- `tgs.exe`
+- `tgs`
+
+Automation helper:
+
+- `tgs_automation.exe`
+- `tgs_automation`
 
 ## Included Commands
 
@@ -73,7 +87,7 @@ or:
 You can also pass values directly:
 
 ```bash
-tgs.exe setup -p +15551234567 -i YOUR_API_ID -k YOUR_API_HASH -o config.data
+tgs.exe setup -p +15551234567 -i YOUR_API_ID -k YOUR_API_HASH -o tgs_config\config.data
 ```
 
 ### 2. Verify the environment
@@ -98,11 +112,19 @@ tgs.exe posts -h
 tgs.exe dump -h
 tgs.exe send -h
 tgs.exe post -h
+tgs_automation.exe -h
 ```
 
 ## Configuration
 
-The tool stores Telegram credentials in a config file, usually `config.data`.
+Current releases use two default working folders:
+
+- `tgs_config/`: configs, sessions, license files, and license requests
+- `tgs_data/`: exported CSV, JSON, SQLite, archives, and media
+
+The main config file usually lives at:
+
+- `tgs_config/config.data`
 
 Most commands accept:
 
@@ -110,7 +132,7 @@ Most commands accept:
 
 Default:
 
-- `config.data`
+- `tgs_config/config.data`
 
 ## License Notes
 
@@ -149,7 +171,7 @@ Creates the local Telegram config file.
 
 Arguments:
 
-- `-o, --output`: output config file, default `config.data`
+- `-o, --output`: output config file, default `tgs_config\config.data`
 - `-p, --phone`: phone number in international format
 - `-i, --api_id`: Telegram API ID
 - `-k, --api_hash`: Telegram API hash
@@ -158,7 +180,7 @@ Examples:
 
 ```bash
 tgs.exe setup
-tgs.exe setup -o config-anna.data
+tgs.exe setup -o tgs_config\config-anna.data
 tgs.exe setup -p +15551234567 -i 123456 -k abcdef123456
 ```
 
@@ -175,14 +197,14 @@ Arguments:
 Behavior:
 
 - if `--source` is omitted, an interactive selector is shown
-- default output is a timestamped CSV in `users/`
+- default output is a timestamped CSV in `tgs_data/users/`
 - CSV columns include username, user ID, access hash, display name, group title, and group ID
 
 Examples:
 
 ```bash
 tgs.exe users -s my_group
-tgs.exe users -s 123456789 -o users\members.csv
+tgs.exe users -s 123456789 -o tgs_data\users\members.csv
 ```
 
 ### `add`
@@ -207,9 +229,9 @@ Behavior:
 Examples:
 
 ```bash
-tgs.exe add -i users\members.csv -t my_target_group
+tgs.exe add -i tgs_data\users\members.csv -t my_target_group
 tgs.exe add -s source_group -t target_group
-tgs.exe add -i users\members.csv -t target_group -m username -d 01:30:00
+tgs.exe add -i tgs_data\users\members.csv -t target_group -m username -d 01:30:00
 ```
 
 ### `posts`
@@ -242,6 +264,7 @@ Notes:
 - `csv` stores spreadsheet-friendly rows with proper multiline escaping
 - `sqlite` stores a richer queryable dataset
 - `all` creates `text`, `json`, and `sqlite`
+- default output goes to `tgs_data/posts/` unless you pass `--output`
 
 Examples:
 
@@ -280,6 +303,7 @@ Typical stored data includes:
 - participant information
 - messages
 - optional media records
+- default output goes to `tgs_data/dump/` unless you pass `--output`
 
 Examples:
 
@@ -338,16 +362,16 @@ Operational notes:
 Examples:
 
 ```bash
-tgs.exe send -i users\members.csv -t message.txt -f text
-tgs.exe send -i users\members.csv -t message.html -f html
-tgs.exe send -i users\members.csv -t message.md -f markdown --preview
-tgs.exe send -i users\members.csv -t message.md -f markdown --dry-run
+tgs.exe send -i tgs_data\users\members.csv -t message.txt -f text
+tgs.exe send -i tgs_data\users\members.csv -t message.html -f html
+tgs.exe send -i tgs_data\users\members.csv -t message.md -f markdown --preview
+tgs.exe send -i tgs_data\users\members.csv -t message.md -f markdown --dry-run
 tgs.exe send -s source_group -t message.html -f html
-tgs.exe send -i users\members.csv -t message.html -f html --whitelist users\testers.csv --limit-users 10
-tgs.exe send -i users\members.csv -t message.html -f html --blacklist users\do_not_contact.csv
-tgs.exe send -i users\members.csv -t message.html -f html --report-csv reports\send_results.csv
-tgs.exe send -i users\members.csv -t message.html -f html --verbose-log logs\send_verbose.json
-tgs.exe send -i users\members.csv -t message.html -f html --delay 21:30 --delay-min 8 --delay-max 15
+tgs.exe send -i tgs_data\users\members.csv -t message.html -f html --whitelist tgs_data\users\testers.csv --limit-users 10
+tgs.exe send -i tgs_data\users\members.csv -t message.html -f html --blacklist tgs_data\users\do_not_contact.csv
+tgs.exe send -i tgs_data\users\members.csv -t message.html -f html --report-csv tgs_data\reports\send_results.csv
+tgs.exe send -i tgs_data\users\members.csv -t message.html -f html --verbose-log tgs_data\logs\send_verbose.json
+tgs.exe send -i tgs_data\users\members.csv -t message.html -f html --delay 21:30 --delay-min 8 --delay-max 15
 ```
 
 ### `post`
@@ -382,7 +406,7 @@ tgs.exe post -g test_vscode -t announcement.md -f markdown
 tgs.exe post -g "OpenAir Belgrade" -t announcement.txt -f text --preview
 tgs.exe post -g my_channel -t announcement.html -f html --dry-run
 tgs.exe post -g my_channel -t announcement.html -f html --delay 21:30
-tgs.exe post -g my_channel -t announcement.html -f html --verbose-log logs\post_verbose.json
+tgs.exe post -g my_channel -t announcement.html -f html --verbose-log tgs_data\logs\post_verbose.json
 ```
 
 ### `license`
@@ -397,6 +421,32 @@ Usage:
 
 ```bash
 tgs.exe license
+```
+
+### `tgs_automation`
+
+`tgs_automation` is a companion binary for automation-oriented workflows.
+
+Current scope:
+
+- validate an automation plan JSON
+- print a normalized plan view
+- show which main runner will be used
+- show the concrete `tgs` commands implied by the plan
+
+Runner resolution behavior:
+
+- it prefers the compiled `tgs.exe` or `tgs` binary when present
+- it falls back to `python tgs.py` only when the main binary is not available
+
+Examples:
+
+```bash
+tgs_automation.exe -h
+tgs_automation.exe validate-plan plan.json
+tgs_automation.exe show-plan plan.json
+tgs_automation.exe show-runner
+tgs_automation.exe show-commands plan.json
 ```
 
 ## Message Formats
@@ -414,9 +464,9 @@ Supported values:
 Typical examples:
 
 ```bash
-tgs.exe send -i users\members.csv -t message.txt -f text
-tgs.exe send -i users\members.csv -t message.html -f html
-tgs.exe send -i users\members.csv -t message.md -f markdown
+tgs.exe send -i tgs_data\users\members.csv -t message.txt -f text
+tgs.exe send -i tgs_data\users\members.csv -t message.html -f html
+tgs.exe send -i tgs_data\users\members.csv -t message.md -f markdown
 ```
 
 ## Export Outputs
@@ -429,24 +479,24 @@ Common export targets:
 
 Typical output folders created by the tool:
 
-- `users/`
-- `posts/`
-- `dump/`
-- `licenses/`
-- `license_requests/`
+- `tgs_data/users/`
+- `tgs_data/posts/`
+- `tgs_data/dump/`
+- `tgs_config/licenses/`
+- `tgs_config/license_requests/`
 
 ## Practical Workflows
 
 ### Export members from a group
 
 ```bash
-tgs.exe users -s source_group -o users\members.csv
+tgs.exe users -s source_group -o tgs_data\users\members.csv
 ```
 
 ### Export posts to CSV for spreadsheet work
 
 ```bash
-tgs.exe posts -s my_channel -t csv -o posts\messages.csv
+tgs.exe posts -s my_channel -t csv -o tgs_data\posts\messages.csv
 ```
 
 ### Create a richer SQLite dump with media
@@ -458,7 +508,7 @@ tgs.exe dump -s my_channel -m -a -f "html,md,json"
 ### Preview a bulk message before sending
 
 ```bash
-tgs.exe send -i users\members.csv -t message.md -f markdown --preview
+tgs.exe send -i tgs_data\users\members.csv -t message.md -f markdown --preview
 ```
 
 ### Post one announcement to a target channel
@@ -467,11 +517,20 @@ tgs.exe send -i users\members.csv -t message.md -f markdown --preview
 tgs.exe post -g my_channel -t announcement.html -f html
 ```
 
+### Validate an automation plan
+
+```bash
+tgs_automation.exe validate-plan plan.json
+tgs_automation.exe show-commands plan.json
+```
+
 ## Platform Notes
 
-- `tgs.exe` is the Windows build
-- `tgs` is the Linux build
-- both are one-file executables
+- `tgs.exe` is the Windows main CLI
+- `tgs` is the Linux main CLI
+- `tgs_automation.exe` is the Windows automation helper
+- `tgs_automation` is the Linux automation helper
+- all included artifacts are one-file executables
 - behavior may still depend on Telegram account state, session files, and target chat access
 
 ## Operational Notes

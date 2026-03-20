@@ -1,5 +1,32 @@
 # Changelog
 
+## 1.7.0
+
+Release date: 2026-03-20
+
+Changes since `1.6.0`:
+
+- added `tgs_automation.exe` and `tgs_automation` as companion automation binaries
+- updated the automation helper to prefer the compiled main `tgs` binary and fall back to `python tgs.py` only when needed
+- switched the default runtime layout to `tgs_config/` for config, sessions, and license files
+- switched the default export layout to `tgs_data/` for users, posts, dumps, reports, logs, archives, and media
+- stabilized license validation under Linux and WSL by using a more reliable MAC source for machine binding
+- re-verified the license workflow on both Windows and Linux
+- refreshed and re-verified Windows and Linux one-file binaries for both the main CLI and the automation helper
+- expanded the public documentation in English and Russian for the current command set, runtime layout, and automation helper
+
+Included artifacts in this binary release:
+
+- `tgs.exe`: Windows one-file executable
+- `tgs`: Linux one-file executable
+- `tgs_automation.exe`: Windows automation helper
+- `tgs_automation`: Linux automation helper
+- `tgs.zip`: bundled binary archive
+
+Source repository:
+
+- https://github.com/Antiokh/tgs.py
+
 ## 1.6.0
 
 Release date: 2026-03-20
