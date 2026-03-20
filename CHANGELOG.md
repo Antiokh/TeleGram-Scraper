@@ -1,5 +1,32 @@
 # Changelog
 
+## 1.9.0
+
+Release date: 2026-03-20
+
+Changes since `1.8.0`:
+
+- added executable `run-due` automation flow with SQLite state tracking for due jobs
+- refreshed the GUI automation editor with real weekday selection and automatic message format hints from file extensions
+- cleaned automation message-event metadata so recorded recipients and targets no longer include ANSI console residue
+- re-verified safe `send`, safe `post`, source `run-due`, and binary `run-due` before release
+- refreshed and re-verified Windows binaries for `tgs.exe`, `tgs_automation.exe`, and `tgs_gui.exe`
+- refreshed and re-verified Linux binaries for `tgs` and `tgs_automation`
+- kept `tgs_gui.exe` as a standalone public binary because including it in `tgs.zip` exceeds GitHub's 100 MB hard limit
+
+Included artifacts in this binary release:
+
+- `tgs.exe`: Windows one-file executable
+- `tgs`: Linux one-file executable
+- `tgs_automation.exe`: Windows automation helper
+- `tgs_automation`: Linux automation helper
+- `tgs_gui.exe`: Windows desktop GUI frontend
+- `tgs.zip`: bundled CLI and automation archive
+
+Source repository:
+
+- https://github.com/Antiokh/tgs.py
+
 ## 1.8.0
 
 Release date: 2026-03-20

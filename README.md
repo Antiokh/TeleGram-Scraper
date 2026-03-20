@@ -50,7 +50,7 @@ Desktop GUI:
 
 The GUI binary is a frontend over the main CLI runtime.
 Place `tgs_gui.exe` next to `tgs.exe` in the same folder so the GUI can invoke the compiled CLI binary directly.
-The repository `tgs.zip` bundle remains focused on the CLI pair and automation helper; the GUI is distributed as a separate standalone binary.
+The repository `tgs.zip` bundle remains focused on the CLI pair and automation helper; the GUI is distributed as a separate standalone binary because adding `tgs_gui.exe` pushes the archive above GitHub's 100 MB hard limit.
 
 ## Included Commands
 
@@ -442,11 +442,15 @@ Current scope:
 - print a normalized plan view
 - show which main runner will be used
 - show the concrete `tgs` commands implied by the plan
+- execute jobs that are due right now through `run-due`
+- record automation state in SQLite for later inspection
 
 Runner resolution behavior:
 
 - it prefers the compiled `tgs.exe` or `tgs` binary when present
 - it falls back to `python tgs.py` only when the main binary is not available
+- `run-due` expects an external scheduler heartbeat such as Windows Task Scheduler or cron
+- nothing runs just because a job exists in a plan file; a scheduler still has to call `run-due`
 
 Examples:
 
@@ -456,6 +460,7 @@ tgs_automation.exe validate-plan plan.json
 tgs_automation.exe show-plan plan.json
 tgs_automation.exe show-runner
 tgs_automation.exe show-commands plan.json
+tgs_automation.exe run-due plan.json
 ```
 
 ## Message Formats
@@ -532,6 +537,20 @@ tgs.exe post -g my_channel -t announcement.html -f html
 tgs_automation.exe validate-plan plan.json
 tgs_automation.exe show-commands plan.json
 ```
+
+### Execute automation jobs that are due right now
+
+```bash
+tgs_automation.exe run-due plan.json
+```
+
+Operational model:
+
+- save the plan file from the GUI or prepare it manually
+- let Task Scheduler, cron, or another wrapper call `run-due` repeatedly
+- if the current local date/time is earlier than a job slot, the job is skipped for now
+- if the current local date/time is later than the slot, the job runs once and is recorded in SQLite
+- the default automation state DB lives next to the plan as `<plan_name>_automation.sqlite`
 
 ## Platform Notes
 
