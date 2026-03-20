@@ -1,5 +1,7 @@
 ﻿# TeleGram-Scraper
 
+Русская версия документации: [README.ru.md](README.ru.md)
+
 Public binary distribution repository for the `tgs.py` project.
 
 This repository contains release artifacts only:
