@@ -10,6 +10,7 @@ This repository contains release artifacts only:
 - `tgs`: Linux one-file executable
 - `tgs_automation.exe`: Windows automation helper
 - `tgs_automation`: Linux automation helper
+- `tgs_gui.exe`: Windows desktop GUI frontend
 - `tgs.zip`: bundled release archive
 
 Source code lives in the main repository:
@@ -42,6 +43,14 @@ Automation helper:
 
 - `tgs_automation.exe`
 - `tgs_automation`
+
+Desktop GUI:
+
+- `tgs_gui.exe`
+
+The GUI binary is a frontend over the main CLI runtime.
+Place `tgs_gui.exe` next to `tgs.exe` in the same folder so the GUI can invoke the compiled CLI binary directly.
+The repository `tgs.zip` bundle remains focused on the CLI pair and automation helper; the GUI is distributed as a separate standalone binary.
 
 ## Included Commands
 

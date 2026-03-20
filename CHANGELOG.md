@@ -1,5 +1,31 @@
 # Changelog
 
+## 1.8.0
+
+Release date: 2026-03-20
+
+Changes since `1.7.0`:
+
+- added `tgs_gui.exe` as a Windows desktop GUI binary
+- updated the GUI runner to prefer the compiled `tgs.exe` binary for command execution
+- refreshed and re-verified Windows one-file binaries for `tgs.exe`, `tgs_automation.exe`, and `tgs_gui.exe`
+- refreshed and re-verified Linux one-file binaries for `tgs` and `tgs_automation`
+- clarified export filter behavior in runtime output for filtered message exports
+- kept `tgs_gui.exe` as a standalone public binary; the repository `tgs.zip` bundle does not include the GUI binary
+
+Included artifacts in this binary release:
+
+- `tgs.exe`: Windows one-file executable
+- `tgs`: Linux one-file executable
+- `tgs_automation.exe`: Windows automation helper
+- `tgs_automation`: Linux automation helper
+- `tgs_gui.exe`: Windows desktop GUI frontend
+- `tgs.zip`: bundled CLI and automation archive
+
+Source repository:
+
+- https://github.com/Antiokh/tgs.py
+
 ## 1.7.0
 
 Release date: 2026-03-20
